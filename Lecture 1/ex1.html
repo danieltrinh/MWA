@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Lab 1 - Excercise 1 </title>
+        <link rel="shortcut icon" href="#">
+    </head>
+    <body>
+        <div id="source_string">This house is nice!</div>
+        <script>
+            let s = document.getElementById("source_string").textContent;
+            let ss = new String(s);
+            
+            function replaceWords(string, banned_arr)
+            {
+                for (const ban of banned_arr)
+                    if(string.includes(ban))
+                        string = string.replace(ban, "***");
+                return string;
+            }
+            
+            String.prototype.filterWords = function(banned_arr){
+//                let str_arr = this.split(" ");                
+//                for (const ban of banned_arr)
+//                    {
+//                        console.log(ban);
+//                        let index = str_arr.findIndex(x => x == ban)
+//                        if(index)
+//                            {
+//                                str_arr[index] = "***";
+//                                
+//                            }
+//                    }
+//                let result = str_arr.join(" ")
+                let res = this;
+                return replaceWords(res,banned_arr);
+            }
+            
+            String.prototype.filterWords2 = function(banned_arr){
+                let res = this;
+                return new Promise(
+                    (resolve, reject) => {
+                        let flag = false;
+                        for (const ban of banned_arr)
+                            if(res.includes(ban))
+                            {
+                                flag = true;
+                                string = res.replace(ban, "***");
+                            }
+                        if(flag)
+                            resolve(string);
+                        else
+                            reject("No match")
+                    }
+                )
+            }
+                        
+            console.log('Using ES6');
+            let result1 = s.filterWords(["house", "nice"]);
+            console.log("   " + result1);
+            
+            console.log('Using Promises');
+            let result2 = s.filterWords2(["house", "nice"])
+                            .then(data => console.log("   " + data))
+                            .catch(err => console.log(err));
+            
+        </script>
+    </body>
+</html>
