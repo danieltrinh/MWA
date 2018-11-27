@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Lab 1 - Excercise 1 - 3 </title>
+        <link rel="shortcut icon" href="#">
+    </head>
+    <body>
+        <div id="source_string">This house is nice!</div>
+        <script>
+            let s = document.getElementById("source_string").textContent;
+            let ss = new String(s);
+            
+            function replaceWords(string, banned_arr)
+            {
+                str_arr = string.split(" ");
+                str_arr = str_arr.map( (s) => 
+                    {
+                        if(banned_arr.includes(s))
+                                    return "***";
+                                else 
+                                    return s;
+                    }
+                )
+                
+                return str_arr.join(" ");
+            }
+            
+            String.prototype.filterWords2 = function(banned_arr){
+                let string = this;
+                return new Promise(
+                    (resolve, reject) => {
+                        console.log('Using Promises');
+                        
+                        let res = replaceWords(string, banned_arr);
+                        
+                        if(res != string)
+                            resolve(res);
+                        else
+                            reject("No match")
+                    }
+                )
+            }
+         
+            String.prototype.filterWords3 = async function(banned_arr){
+                try{
+                    console.log("Using await");
+                    let re = await this.filterWords2(banned_arr);
+                    console.log("   " + re);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            
+            s.filterWords3(["house", "nice"]);
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Lab 1 - Excercise 1 - 4 </title>
+        <link rel="shortcut icon" href="#">
+        <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+    </head>
+    <body>
+        <div id="source_string">This house is nice!</div>
+        <script>
+            let s = document.getElementById("source_string").textContent;
+        
+            String.prototype.filterWords4 = function (banned_arr)
+            {
+                const { from } = rxjs;
+                const { map, filter, reduce } = rxjs.operators;
+                
+                let str_arr = this.split(" ");
+                console.log(str_arr);
+                from(str_arr)
+                .pipe(
+                    map((n) => {
+                        if(banned_arr.includes(n))
+                            return "***";
+                        else
+                            return s;
+                        }
+                    ),
+                    reduce((x,y) => x + " " + y)
+                )
+                .subscribe(
+                    (obj) => console.log(obj)
+                )
+            }
+            
+            s.filterWords4(["house", "nice"]);
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Lab 1 - Excercise 1 - 1 </title>
+        <link rel="shortcut icon" href="#">
+    </head>
+    <body>
+        <div id="source_string">This house is nice!</div>
+        <script>
+            let s = document.getElementById("source_string").textContent;
+            let ss = new String(s);
+            
+            function replaceWords(string, banned_arr)
+            {
+                str_arr = string.split(" ");
+                str_arr = str_arr.map( (s) => 
+                    {
+                        if(banned_arr.includes(s))
+                                    return "***";
+                                else 
+                                    return s;
+                    }
+                )
+                
+                return str_arr.join(" ");
+            }
+            
+            String.prototype.filterWords = function(banned_arr){
+                console.log('Using ES6');
+                
+                return replaceWords(this, banned_arr);
+                
+            }
+            
+            let result1 = s.filterWords(["house", "nice"]);
+            console.log("   " + result1);
+            
+        </script>
+    </body>
+</html>
