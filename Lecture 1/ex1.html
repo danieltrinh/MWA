@@ -30,6 +30,7 @@
 //                            }
 //                    }
 //                let result = str_arr.join(" ")
+                console.log('Using ES6');
                 let res = this;
                 return replaceWords(res,banned_arr);
             }
@@ -38,29 +39,41 @@
                 let res = this;
                 return new Promise(
                     (resolve, reject) => {
+                        console.log('Using Promises');
                         let flag = false;
                         for (const ban of banned_arr)
                             if(res.includes(ban))
                             {
                                 flag = true;
-                                string = res.replace(ban, "***");
+                                res = res.replace(ban, "***");
                             }
                         if(flag)
-                            resolve(string);
+                            resolve(res);
                         else
                             reject("No match")
                     }
                 )
             }
+            
+            String.prototype.filterWords3 = async function(banned_arr){
+                try{
+                    console.log("Using await");
+                    let re = await this.filterWords2(banned_arr);
+                    console.log("   " + re);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
                         
-            console.log('Using ES6');
+            
             let result1 = s.filterWords(["house", "nice"]);
             console.log("   " + result1);
             
-            console.log('Using Promises');
             let result2 = s.filterWords2(["house", "nice"])
                             .then(data => console.log("   " + data))
                             .catch(err => console.log(err));
+            
+            s.filterWords3(["house", "nice"]);
             
         </script>
     </body>
