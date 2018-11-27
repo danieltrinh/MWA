@@ -16,6 +16,7 @@
                 
                 let str_arr = this.split(" ");
                 console.log(str_arr);
+                
                 from(str_arr)
                 .pipe(
                     map((n) => {
@@ -25,10 +26,12 @@
                             return s;
                         }
                     ),
-                    reduce((x,y) => x + " " + y)
+                    reduce((x,y) => x + " " + y,"")
                 )
                 .subscribe(
-                    (obj) => console.log(obj)
+                    (obj) => console.log(obj),
+                    null,
+                    () => console.log("done")
                 )
             }
             
