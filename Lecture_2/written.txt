@@ -1,6 +1,11 @@
 Written Exercises
 1.Explain why do we want sometimes to use setImmediate insteadof using setTimeout?
+setImmediate will add the callback function to check phase of event loop
+while setTimeout put it in the timer phase
 
-2.Explain the difference between process.nextTick andsetImmediate?
+2.Explain the difference between process.nextTick and setImmediate?
+nextTick push the callback function into the "nextTick" queue, and the functions in this queue will be executed first, before the I/O operation in the event loop
+setImmediate will add the callback function to check phase of event loop
 
-3.Name 10 core modules that Node provides by default.sdopfjsdpfsdj
+3.Name 10 core modules that Node provides by default.
+buffer, assert, dns, domain, http, https, stream, v8, util
