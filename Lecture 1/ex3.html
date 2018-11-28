@@ -11,6 +11,17 @@
                "category": "food",
                "price": 200
            }
+           function applyCoupon(item)
+            {
+                return (discount) => {
+                    item.price *= (100-discount)/100; 
+                    return item;
+                };
+            }
+            
+            let result = applyCoupon(item)(10).price;
+            console.log(result);
+            
         </script>
     </body>
 </html>

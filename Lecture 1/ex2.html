@@ -6,16 +6,17 @@
     </head>
     <body>
         <script>
-           function isWeekend(day){
-//               const todayDate = new Date();
-//               const day = todayDate.getDate();
+           function isWeekend(){
+               const todayDate = new Date();
+               const day = todayDate.getDate();
                
                const{ of } = rxjs;
                const{filter} = rxjs.operators;
                
                of(day)
                .pipe(
-                filter((n) => n==6 || n ==0)
+                filter((n) => n==6 || n ==0),
+                   
                )
                .subscribe(
                    (x) => console.log("weekend"),
@@ -23,7 +24,7 @@
                    null
                )
            }
-            isWeekend(3);
+            isWeekend();
         </script>
     </body>
 </html>
