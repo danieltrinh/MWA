@@ -1,0 +1,6 @@
+Written Exercises
+1.Explain why do we want sometimes to use setImmediate insteadof using setTimeout?
+
+2.Explain the difference between process.nextTick andsetImmediate?
+
+3.Name 10 core modules that Node provides by default.sdopfjsdpfsdj
