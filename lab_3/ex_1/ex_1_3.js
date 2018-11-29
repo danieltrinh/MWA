@@ -20,9 +20,18 @@ function getAddress(url){
     })
 }
 
-getAddress(url)
-    .then((addr) => console.log("address: "+ addr))
-    .catch((error) => console.log("can't find IP for" + error));
+async function getAddressAsync(url)
+{
+    try{
+        let res = await getAddress(url);
+        console.log(res);
+    }
+    catch(error){
+        console.log("can't find IP for" + error);
+    }
+}
+
+getAddressAsync(url);
 
 console.log("Finished");
 
