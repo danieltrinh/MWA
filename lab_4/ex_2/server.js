@@ -14,15 +14,16 @@ function checkSystem(machine) {
     return "System is checked successfully";
 }
 
-const {from} = require('rxjs');
-const {map} = require('rxjs/operators');
+// const {from} = require('rxjs');
+// const {map} = require('rxjs/operators');
+//
+// const data = [machine];
+//
+// from(data)
+//     .pipe(
+//         map((machine) => checkSystem(machine))
+//     )
+//     .subscribe(
+//         (obj) => console.log(obj)
+//     );
 
-const data = [machine];
-
-from(data)
-    .pipe(
-        map((machine) => checkSystem(machine))
-    )
-    .subscribe(
-        (obj) => console.log(obj)
-    );
