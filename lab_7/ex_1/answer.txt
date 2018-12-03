@@ -1,0 +1,32 @@
+NoSQL design model
+
+Student {
+    id,
+    student_id,
+    name,
+    contact,
+    borrowed_books {
+        *array of books*
+    },
+    returned_books {
+        *array of books8
+    }
+}
+
+Book {
+    id,
+    ISBN,
+    copy,
+    author {
+        *array of authors*
+    },
+    tag {
+        *array of tags*
+    },
+    borrowed_by {
+        student,
+        borrowed_date,
+        expired_date,
+        return_date,
+    }
+}
