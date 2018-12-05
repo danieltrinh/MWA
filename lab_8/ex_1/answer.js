@@ -46,4 +46,24 @@ db.restaurants.find({'district': {$nin : ['Staten Island', 'Queens', 'Bronx', 'B
 // 16/ rsts score <= 10
 db.restaurants.find({'grades.score': {$lte: 10}}, {_id:0, restaurant_id:1, name: 1, district: 1, cuisine:1}).pretty();
 
-// 17/
+// 17/ rsrs coors > 42 & <= 52
+db.restaurants.find({'address.coord.1': {$gt: 42, $lte:52}},{_id:0, restaurant_id:1, name:1, address:1}).pretty();
+
+// 18/ re-arrange name of restaurants in ascending order
+db.restaurants.find({}).sort({'name': 1}).pretty();
+
+// 19/ re-arrange name of restaurants in descending order
+db.restaurants.find({}).sort({'name': -1}).pretty();
+
+// 20/ re-arrange cuisine ascending, same cuisine, district descening
+db.restaurants.find({}, {}, {'sort': [['cuisine', 1], ['district', -1]]}).pretty();
+db.restaurants.find({},{cuisine:1, district:1}).sort({'cuisine': -1 ,'district': 1}).pretty();
+
+// 21/ all adress contains street or not
+db.restaurants.find({'address.street':{$exists:true}}).pretty();
+
+// 22/ coord field is double
+db.restaurants.find({'address.coord' :  {$type : 'double'}}).pretty();
+
+// 23/ contains 'Mad' as first 3 letter
+db.restaurants.find({'name': {$regex: '^Mad'}},{_id:0, name:1, district:1, 'address.coord': 1}).pretty();
