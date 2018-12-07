@@ -5,13 +5,13 @@ http.createServer(function (request, response) {
 }).listen(8081);
 
 Array.prototype.even = function(){
-    const result = this.filter((n) => n%2==0);
+    const result = this.filter((n) => n%2===0);
     process.nextTick(() => console.log(result));
     return result;
 };
 
 Array.prototype.odd = function(){
-    const result = this.filter((n) => n%2!=0);
+    const result = this.filter((n) => n%2!==0);
     process.nextTick(() => console.log(result));
     return result;
 };

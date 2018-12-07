@@ -7,8 +7,7 @@
         <div id="source_string">This house is nice!</div>
         <script>
             let s = document.getElementById("source_string").textContent;
-            let ss = new String(s);
-            
+
             function replaceWords(string, banned_arr)
             {
                 str_arr = string.split(" ");
@@ -32,7 +31,7 @@
                         
                         let res = replaceWords(string, banned_arr);
                         
-                        if(res != string)
+                        if(res !== string)
                             resolve(res);
                         else
                             reject("No match")

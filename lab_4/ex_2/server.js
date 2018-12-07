@@ -1,29 +1,23 @@
+const {Observable} = require('rxjs');
 const os = require('os');
 
-const core = os.cpus().length;
-const ram = Math.round(os.totalmem() / (1024 * 1024 * 1024));
-const machine = {core: core, ram: ram};
+const checkSystem$ = Observable.create(function(observer){
+    observer.next("Checking your system");
 
-console.log("Checking your system");
+    const core = os.cpus().length;
+    const ram = Math.round(os.totalmem() / (1024 * 1024 * 1024));
 
-function checkSystem(machine) {
-    if (machine.core < 2)
-        return "Processor is not supported";
-    if (machine.ram < 4)
-        return "This app needs at least 4GB of RAM";
-    return "System is checked successfully";
-}
+    if(core < 20)
+        observer.error('Processor is not supported');
+    if(ram < 4)
+        observer.error("This app needs at least 4GB of RAM");
 
-// const {from} = require('rxjs');
-// const {map} = require('rxjs/operators');
-//
-// const data = [machine];
-//
-// from(data)
-//     .pipe(
-//         map((machine) => checkSystem(machine))
-//     )
-//     .subscribe(
-//         (obj) => console.log(obj)
-//     );
+    observer.complete();
+});
+
+const subscribe = checkSystem$.subscribe(
+    (x) => console.log(x),
+    (err) => console.log(err),
+    () => console.log('System is checked sucessfully')
+);
 

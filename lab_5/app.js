@@ -28,12 +28,14 @@ app.get('/users', (req, res) => {
     res.set('Content-Type', 'text/html');
     res.set('Cache-Control', 'private, max-age=86400');
 
+
     let id = req.query.id;
     let params = {};
     if (id) {
         params = {result: id};
     } else {
         let page = req.query.page ? req.query.page : 1;
+        res.header('link', `</?page=${parseInt(req.query.page) +1}>; rel='next'`);
         params = {
             results: 20,
             page: page
