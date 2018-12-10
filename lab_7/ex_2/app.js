@@ -11,7 +11,22 @@ const client = new MongoClient('mongodb://localhost:27017');
 app.set('port', process.env.PORT || port);
 
 app.listen(port, () => {
-   console.log("Server is running on port " + port);
+   console.dir("Server is running on port " + port);
+});
+
+let collection;
+app.use( (req,res,next) => {
+    if(!collection:
+    {
+        client.connect((err)=>{
+            collection=client.db('mydb').collection('homework7');
+            req.collection = collection;
+            next();
+        })
+    }
+    else{
+        next();
+    }
 });
 
 app.all('/secret', (req, res, next)=>{
@@ -19,17 +34,12 @@ app.all('/secret', (req, res, next)=>{
     res.set('Content-Type', 'application/json');
     res.set('Cache-Control', 'private, max-age=86400');
 
-    client.connect((err)=>{
-        const db = client.db('mydb');
-        const collection = db.collection('homework7');
-
-        collection.findOne({}, (err,doc) => {
-            let decrypted = decrypt(doc.message);
-            res.end(decrypted);
-            client.close();
-        });
-        console.dir("Done");
+    req.collection.findOne({}, (err,doc) => {
+        let decrypted = decrypt(doc.message);
+        res.end(decrypted);
+        client.close();
     });
+    console.dir("Done");
 });
 
 function decrypt(message)
