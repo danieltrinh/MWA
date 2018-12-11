@@ -16,7 +16,7 @@ app.listen(port, () => {
 
 let collection;
 app.use( (req,res,next) => {
-    if(!collection:
+    if(!collection)
     {
         client.connect((err)=>{
             collection=client.db('mydb').collection('homework7');
