@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<app-smart [strings]="inputStrings"></app-smart>
+<app-dump></app-dump>
+
+<div isVisible [display]="false">
+  supposed to be hidden
+</div>
+
+<div loggable>
+  Double-click to log
+</div>
+
+<router-outlet></router-outlet>
+
