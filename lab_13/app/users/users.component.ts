@@ -22,7 +22,7 @@ import {DataService} from '../data.service';
     </div>
   `,
   styles: [],
-  providers: [DataService]
+  providers: []
 })
 export class UsersComponent {
 
@@ -37,7 +37,7 @@ export class UsersComponent {
     console.log('https://randomuser.me/api/?results=10');
     this.dataService.getNewData(10).subscribe(
       (data) => {
-        this.users = data.results;
+        this.users = data['results'];
       },
       (error) => console.log(error),
       () => console.log('completed')

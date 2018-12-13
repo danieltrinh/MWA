@@ -31,5 +31,13 @@ export class DataService {
     }
   }
 
+  validateUser(id) {
+    for (const user of this.data) {
+      if (user.login.uuid === id)
+        return true;
+    }
+    return false;
+  }
+
 
 }
