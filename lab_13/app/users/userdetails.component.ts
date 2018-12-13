@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-userdetails',
@@ -7,22 +9,20 @@ import {HttpClient} from '@angular/common/http';
     <pre>{{userData| json}}</pre>
   `,
   styles: [],
-  providers: [HttpClient]
+  providers: [HttpClient, DataService]
 })
 export class UserdetailsComponent implements OnInit {
 
   public userData;
-  constructor(public http: HttpClient) { }
 
-  ngOnInit() {
-    this.http.get('https://randomuser.me/api/?uuid=00a08ed6-ea51-4852-ac50-18a7f7128ad4')
-      .subscribe(
-        (data) => {
-          this.userData = data;
-        },
-        (err) => console.log(err),
-        () => console.log('completed')
-      );
+  constructor(public http: HttpClient, public route: ActivatedRoute, public dataService: DataService) {
+
   }
 
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.userData = this.dataService.getUserById(params.id);
+
+    });
+  }
 }
