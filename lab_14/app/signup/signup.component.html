@@ -1,14 +1,10 @@
 <h1> Sign up </h1>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div formGroupName="userData">
-    <div class="form-group">
-      <!--<label for="firstname">Fi</label>-->
-      <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First name">
-    </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First name">
   </div>
 
   <div class="form-group">
-    <!--<label for="firstname">Username</label>-->
     <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last name">
   </div>
 
@@ -16,18 +12,14 @@
     <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
   </div>
 
-
   <div class="form-group">
-    <!--<label for="password">Password</label>-->
     <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
   </div>
 
   <div class="form-group">
-    <!--<label for="password">Password</label>-->
     <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
            placeholder="Confirm Password">
   </div>
-
 
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
 </form>
