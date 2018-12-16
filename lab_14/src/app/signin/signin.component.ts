@@ -1,32 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import {TokenService} from '../token.service';
 
 @Component({
   selector: 'signin',
   templateUrl: './signin.component.html',
-  styles: []
+  styles: [],
+  providers: [AuthService]
 })
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService, private token:TokenService) {
     this.myForm = formBuilder.group({
-      'username' : ['', [Validators.required]],
-      'password' : ['', [Validators.required]]
-    })
+      'username': ['aaa', [Validators.required]],
+      'password': ['bbb', [Validators.required]]
+    });
   }
 
   ngOnInit() {
   }
 
-  onSubmit()
-  {
-    this.http
-      .post('http://localhost:3000', this.myForm.value)
+  onSubmit() {
+    this.auth.login(this.myForm.value)
       .subscribe(
-        (res) => {
-          console.log(res);
+        (token) => {
+          this.token.saveToken(token.idToken);
         },
         (err) => console.log(err)
       )

@@ -18,13 +18,22 @@ app.get('*', (req, res) => {
 
 // Parsers for POST data
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 app.set('port', port);
 
 app.use('/api', api);
 
-app.listen(port, () => {
-  console.dir('Server is running on port ' +  port);
+const RSA_PRIVATE_KEY = fs.readFileSync('./jwtRS256.key');
+
+const checkIfAuthenticated = expressJwt({
+  secret: RSA_PUBLIC_KEY
 });
+
+app.route('/protected').get(checkIfAuthenticated);
+
+app.listen(port, () => {
+  console.dir('Server is running on port ' + port);
+});
+
 
